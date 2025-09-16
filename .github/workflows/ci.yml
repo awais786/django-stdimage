@@ -40,4 +40,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --ds=tests.settings --cov=stdimage --cov-report=xml
+          pytest --ds=mytests.settings --cov=stdimage --cov-report=xml

@@ -34,8 +34,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e .[tests]
+          pip install -e .
           pip install "Django==${{ matrix.django-version }}"
+          pip install pytest pytest-django pytest-cov
 
       - name: Run tests
         run: |

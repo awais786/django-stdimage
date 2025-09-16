@@ -81,15 +81,16 @@ jobs:
           - "test"
           - "test,progressbar"
     steps:
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-    - run: sudo apt install gettext -y
-    - uses: actions/checkout@v4
-    - run: python -m pip install --upgrade pip codecov
-    - run: python -m pip install -e .[${{ matrix.extra }}]
-      if: ${{ matrix.extra }}
-    - run: python -m pip install django~=${{ matrix.django-version }}a
-    - run: python -m pytest
-    - run: codecov
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: sudo apt-get update && sudo apt-get install -y gettext
+      - uses: actions/checkout@v4
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e .[${{ matrix.extra }}]
+      - run: python -m pip install "Django~=${{ matrix.django-version }}.0"
+      - run: pytest --maxfail=1 --disable-warnings -q
+      - uses: codecov/codecov-action@v4
+
+

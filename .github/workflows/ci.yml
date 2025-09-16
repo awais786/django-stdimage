@@ -71,25 +71,26 @@ jobs:
       - lint
       - msgcheck
     strategy:
+      fail-fast: false
       matrix:
-        python-version:
+        python_version:
           - "3.10"
-        django-version:
+        django_version:
           - "4.2"
           - "5.2"
         extra:
           - "test"
           - "test,progressbar"
     steps:
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python_version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python_version }}
       - run: sudo apt-get update && sudo apt-get install -y gettext
       - uses: actions/checkout@v4
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e .[${{ matrix.extra }}]
-      - run: python -m pip install "Django~=${{ matrix.django-version }}.0"
+      - run: python -m pip install "Django~=${{ matrix.django_version }}.0"
       - run: pytest --maxfail=1 --disable-warnings -q
       - uses: codecov/codecov-action@v4
 

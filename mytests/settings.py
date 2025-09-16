@@ -20,7 +20,7 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.sites",
     "stdimage",
-    "tests",
+    "mytests",
 )
 
 STORAGES = {

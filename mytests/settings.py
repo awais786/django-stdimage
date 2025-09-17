@@ -20,10 +20,17 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.sites",
     "stdimage",
-    "tests",
+    "mytests",
 )
 
-DEFAULT_FILE_STORAGE = "tests.storage.MyFileSystemStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": "tests.storage.MyFileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
 TEMPLATES = [
     {
